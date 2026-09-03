@@ -1,0 +1,17 @@
+root = true
+
+[*.c]
+indent_size = 8
+indent_style = tab
+
+[*.h]
+indent_size = 8
+indent_style = tab
+
+[.clang*]
+indent_size = 4
+indent_style = space
+
+[*.json]
+indent_size = 4
+indent_style = space
