@@ -1,8 +1,7 @@
-CC := clang
+CC ?= clang
 CFLAGS := -Wall -Wextra -Iinclude -MMD -MP
 DEBUG ?= 0
 OBJDIR := obj
-UNAME := $(shell uname -s)
 LDFLAGS :=
 LDLIBS = -lgit2
 
@@ -14,12 +13,24 @@ else
     CFLAGS += -O2
 endif
 
-ifeq ($(UNAME), Darwin)
-	CFLAGS += -I/opt/homebrew/include
-	LDFLAGS += -L/opt/homebrew/lib
+ifeq ($(shell uname -s), Darwin)
+	ARCH := $(shell uname -m)
+
+	ifeq ($(ARCH), arm64)
+		CFLAGS += -I/opt/homebrew/include
+		LDFLAGS += -L/opt/homebrew/lib
+	else ifeq ($(ARCH), x86_64)
+		CFLAGS += -I/usr/local/include
+		LDFLAGS += -L/usr/local/lib
+	endif
 endif
 
-TARGET := main.out
+EXT:=.cgi
+ifeq ($(OS),Windows_NT)
+	EXT += .exe
+endif
+
+TARGET := gv$(EXT)
 
 SRCS := $(wildcard *.c)
 OBJS := $(SRCS:%.c=$(OBJDIR)/%.o)
