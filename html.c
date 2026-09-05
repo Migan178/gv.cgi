@@ -82,17 +82,16 @@ char *escape_html(char *src, size_t len)
 	return sanitized_html;
 }
 
-// Before use the function, YOU SHOULD USE escape_html.
+// Before use the function, YOU SHOULD USE escape_html when include untrusted
+// text.
 void print_html(const char *head, const char *body)
 {
-	if (head == NULL)
-		head = "";
-
 	printf("<!DOCTYPE html>\n");
-	printf("    <html>\n");
+	printf("    <html lang=\"en-US\">\n");
 	printf("    <head>\n");
 	printf("        <title>gv.cgi</title>\n");
-	printf("        %s\n", head);
+	if (head != NULL)
+		printf("        %s\n", head);
 	printf("    </head>\n");
 	printf("    <body>\n");
 	printf("        %s\n", body);
