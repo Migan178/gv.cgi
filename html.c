@@ -84,7 +84,8 @@ char *escape_html(char *src, size_t len)
 
 // Before use the function, YOU SHOULD USE escape_html when include untrusted
 // text.
-void print_html(const char *head, const char *body)
+// It doesn't close html. you should close html tag.
+void print_html_wo_body(const char *head)
 {
 	printf("<!DOCTYPE html>\n");
 	printf("    <html lang=\"en-US\">\n");
@@ -93,6 +94,13 @@ void print_html(const char *head, const char *body)
 	if (head != NULL)
 		printf("        %s\n", head);
 	printf("    </head>\n");
+}
+
+// Before use the function, YOU SHOULD USE escape_html when include untrusted
+// text.
+void print_html(const char *head, const char *body)
+{
+	print_html_wo_body(head);
 	printf("    <body>\n");
 	printf("        %s\n", body);
 	printf("    </body>\n");

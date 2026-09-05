@@ -46,18 +46,18 @@ int main(void)
 	path_info = getenv("PATH_INFO");
 	if (path_info == NULL || strcmp(path_info, "/") == 0 ||
 	    path_info[0] == '\0') {
-		print_html(NULL, "<h1>Main</h1>");
+		err = print_main_page();
 	}
 
 out_git_shutdown:
 	init_count = git_libgit2_shutdown();
 out:
-	if (err != 0 || init_count < 0) {
+	if (err < 0 || init_count < 0) {
 		git_err = git_error_last();
-		if (git_err->message != NULL)
+		if (git_err != NULL && git_err->message != NULL)
 			fprintf(stderr, "%s\n", git_err->message);
 
-		if (err < 0)
+		if (err < 1)
 			err = 1;
 	}
 

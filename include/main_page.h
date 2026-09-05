@@ -2,4 +2,4 @@
 // Copyright 2026 Siwoo Jeon
 #pragma once
 
-void print_main_page();
+int print_main_page();

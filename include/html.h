@@ -6,4 +6,6 @@
 
 char *escape_html(char *src, size_t len);
 
+void print_html_wo_body(const char *head);
+
 void print_html(const char *head, const char *body);
