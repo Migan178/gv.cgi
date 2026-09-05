@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // Copyright 2026 Siwoo Jeon
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -79,4 +80,22 @@ char *escape_html(char *src, size_t len)
 	sanitized_html[pos] = '\0';
 
 	return sanitized_html;
+}
+
+// Before use the function, YOU SHOULD USE escape_html.
+void print_html(const char *head, const char *body)
+{
+	if (head == NULL)
+		head = "";
+
+	printf("<!DOCTYPE html>\n");
+	printf("    <html>\n");
+	printf("    <head>\n");
+	printf("        <title>gv.cgi</title>\n");
+	printf("        %s\n", head);
+	printf("    </head>\n");
+	printf("    <body>\n");
+	printf("        %s\n", body);
+	printf("    </body>\n");
+	printf("</html>\n");
 }

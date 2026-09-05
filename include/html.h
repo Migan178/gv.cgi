@@ -5,3 +5,5 @@
 #include <stddef.h>
 
 char *escape_html(char *src, size_t len);
+
+void print_html(const char *head, const char *body);
