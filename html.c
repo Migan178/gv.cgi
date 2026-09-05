@@ -88,7 +88,7 @@ char *escape_html(char *src, size_t len)
 void print_html_wo_body(const char *head)
 {
 	printf("<!DOCTYPE html>\n");
-	printf("    <html lang=\"en-US\">\n");
+	printf("<html lang=\"en-US\">\n");
 	printf("    <head>\n");
 	printf("        <title>gv.cgi</title>\n");
 	if (head != NULL)
