@@ -27,7 +27,7 @@ endif
 
 EXT:=.cgi
 ifeq ($(OS),Windows_NT)
-	EXT += .exe
+	EXT := .cgi.exe
 endif
 
 TARGET := gv$(EXT)
