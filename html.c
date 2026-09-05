@@ -9,13 +9,13 @@
 #define ESCAPED_SINGLE_QUOTE "&#39;"
 #define ESCAPED_DOUBLE_QUOTE "&quot;"
 
-inline int check_left_arrow(char src) { return src == '<'; }
-inline int check_right_arrow(char src) { return src == '>'; }
-inline int check_at_sign(char src) { return src == '&'; }
-inline int check_single_qt(char src) { return src == '\''; }
-inline int check_double_qt(char src) { return src == '"'; }
+static inline int check_left_arrow(char src) { return src == '<'; }
+static inline int check_right_arrow(char src) { return src == '>'; }
+static inline int check_at_sign(char src) { return src == '&'; }
+static inline int check_single_qt(char src) { return src == '\''; }
+static inline int check_double_qt(char src) { return src == '"'; }
 
-inline size_t get_len_to_add(char *src, size_t i)
+static inline size_t get_len_to_add(char *src, size_t i)
 {
 	if (check_left_arrow(src[i]) || check_right_arrow(src[i]))
 		return 3;
