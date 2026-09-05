@@ -36,7 +36,10 @@ int main(void)
 
 	method = getenv("REQUEST_METHOD");
 	if (method == NULL || strcmp(method, "GET") != 0) {
-		print_main_page();
+		printf(HEADER, CONTENT_TYPE_HTML, HEADER_SEPARATOR);
+		printf(HEADER, STATUS_405, CONTENT_SEPARATOR);
+		print_html(NULL, "<h1>Wrong Method</h1>");
+
 		goto out_git_shutdown;
 	}
 
