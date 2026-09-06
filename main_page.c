@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // Copyright 2026 Siwoo Jeon
 // #include "html.h"
-
+#include "config.h"
 #include "html.h"
+
 #include <dirent.h>
 #include <git2.h>
 #include <limits.h>
@@ -12,18 +13,13 @@
 
 int print_main_page(void)
 {
+	const struct gv_config *config = get_gv_config();
+
 	int err = 0;
 	DIR *dir = NULL;
-	char *gv_path = NULL;
 	struct dirent *entry = NULL;
 
-	gv_path = getenv("GV_PATH");
-	if (gv_path == NULL) {
-		err = 1;
-		goto out;
-	}
-
-	dir = opendir(gv_path);
+	dir = opendir(config->repo_root);
 	if (dir == NULL) {
 		err = 1;
 		goto out;
@@ -45,7 +41,8 @@ int print_main_page(void)
 		    strcmp(entry->d_name, "..") == 0)
 			continue;
 
-		snprintf(full_path, PATH_MAX, "%s/%s", gv_path, entry->d_name);
+		snprintf(full_path, PATH_MAX, "%s/%s", config->repo_root,
+		         entry->d_name);
 
 		git_err = git_repository_open_ext(
 		    NULL, full_path, GIT_REPOSITORY_OPEN_NO_SEARCH, NULL);
@@ -67,6 +64,7 @@ int print_main_page(void)
 	printf("</html>\n");
 
 	closedir(dir);
+
 out:
 	return err;
 }
