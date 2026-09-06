@@ -1,20 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // Copyright 2026 Siwoo Jeon
 #include "html.h"
+#include "http.h"
 #include "main_page.h"
 
 #include <git2.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define HEADER "%s%s"
-#define CONTENT_TYPE_HTML "Content-Type: text/html"
-#define HEADER_SEPARATOR "\r\n"
-#define CONTENT_SEPARATOR "\r\n\r\n"
-
-#define STATUS_405 "Status: 405 Method Not Allowed"
-#define STATUS_500 "Status: 500 Internal Server Error"
 
 int main(void)
 {

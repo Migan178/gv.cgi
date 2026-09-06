@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-only
 // Copyright 2026 Siwoo Jeon
-// #include "html.h"
 #include "config.h"
 #include "html.h"
+#include "http.h"
 
 #include <dirent.h>
 #include <git2.h>
@@ -22,9 +22,12 @@ int print_main_page(void)
 	dir = opendir(config->repo_root);
 	if (dir == NULL) {
 		err = 1;
+		printf(HEADER, STATUS_500, HEADER_SEPARATOR);
+		printf(HEADER, CONTENT_TYPE_HTML, CONTENT_SEPARATOR);
 		goto out;
 	}
 
+	printf(HEADER, CONTENT_TYPE_HTML, CONTENT_SEPARATOR);
 	print_html_wo_body(NULL);
 	printf("    <body>\n");
 	printf("        <ul>\n");
@@ -54,7 +57,8 @@ int print_main_page(void)
 		if (sanitized_html == NULL)
 			continue;
 
-		printf("            <li>%s</li>\n", sanitized_html);
+		printf("            <li><a href=\"/%s\">%s</a></li>\n",
+		       sanitized_html, sanitized_html);
 
 		free(sanitized_html);
 	}
