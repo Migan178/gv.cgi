@@ -84,6 +84,9 @@ char *escape_html(char *src, size_t len)
 	return sanitized_html;
 }
 
+// The function uses heap. you should free it.
+char *escape_html_str(char *src) { return escape_html(src, strlen(src)); }
+
 // Before use the function, YOU SHOULD USE escape_html when include untrusted
 // text.
 // It doesn't close html. you should close html tag.
@@ -98,6 +101,12 @@ void print_html_wo_body(const char *head)
 	printf("    </head>\n");
 }
 
+void print_html_close_body()
+{
+	printf("    </body>\n");
+	printf("</html>\n");
+}
+
 // Before use the function, YOU SHOULD USE escape_html when include untrusted
 // text.
 void print_html(const char *head, const char *body)
@@ -105,6 +114,5 @@ void print_html(const char *head, const char *body)
 	print_html_wo_body(head);
 	printf("    <body>\n");
 	printf("        %s\n", body);
-	printf("    </body>\n");
-	printf("</html>\n");
+	print_html_close_body();
 }

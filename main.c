@@ -3,6 +3,8 @@
 #include "html.h"
 #include "http.h"
 #include "main_page.h"
+#include "path.h"
+#include "repo_pages.h"
 
 #include <git2.h>
 #include <stdio.h>
@@ -17,6 +19,8 @@ int main(void)
 
 	char *method = NULL;
 	char *path_info = NULL;
+	size_t segments, max_segments = 16;
+	char path[max_segments][256];
 
 	init_count = git_libgit2_init();
 	if (init_count < 0) {
@@ -40,6 +44,18 @@ int main(void)
 	if (path_info == NULL || strcmp(path_info, "/") == 0 ||
 	    path_info[0] == '\0') {
 		err = print_main_page();
+	} else {
+		segments = parse_path(path_info, path, max_segments);
+		if (segments == 0) {
+			printf(HEADER, CONTENT_TYPE_HTML, HEADER_SEPARATOR);
+			printf(HEADER, STATUS_400, CONTENT_SEPARATOR);
+			print_html(NULL, "<h1>wrong location</h1>");
+			goto out_git_shutdown;
+		}
+
+		if (segments == 1) {
+			err = print_repo_summary_page(path[0]);
+		}
 	}
 
 out_git_shutdown:
