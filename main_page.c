@@ -29,7 +29,6 @@ int print_main_page(void)
 
 	printf(HEADER, CONTENT_TYPE_HTML, CONTENT_SEPARATOR);
 	print_html_wo_body(NULL);
-	printf("    <body>\n");
 	printf("        <ul>\n");
 
 	while ((entry = readdir(dir)) != NULL) {
@@ -63,9 +62,7 @@ int print_main_page(void)
 		free(sanitized_html);
 	}
 
-	printf("        </ul>\n");
-	printf("    </body>\n");
-	printf("</html>\n");
+	print_html_close_body();
 
 	closedir(dir);
 

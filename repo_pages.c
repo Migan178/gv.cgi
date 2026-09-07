@@ -44,7 +44,6 @@ int print_repo_summary_page(char *repo_path)
 
 	printf(HEADER, CONTENT_TYPE_HTML, CONTENT_SEPARATOR);
 	print_html_wo_body(NULL);
-	printf("    <body>\n");
 
 	while (i < 10 && !git_revwalk_next(&id, walk)) {
 		git_commit *commit = NULL;

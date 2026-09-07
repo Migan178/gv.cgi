@@ -99,6 +99,7 @@ void print_html_wo_body(const char *head)
 	if (head != NULL)
 		printf("        %s\n", head);
 	printf("    </head>\n");
+	printf("    <body>\n");
 }
 
 void print_html_close_body()
@@ -112,7 +113,6 @@ void print_html_close_body()
 void print_html(const char *head, const char *body)
 {
 	print_html_wo_body(head);
-	printf("    <body>\n");
 	printf("        %s\n", body);
 	print_html_close_body();
 }
