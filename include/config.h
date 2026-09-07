@@ -4,6 +4,7 @@
 
 struct gv_config {
 	char *repo_root;
+	char *title;
 };
 
 const struct gv_config *get_gv_config(void);

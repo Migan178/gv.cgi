@@ -95,7 +95,7 @@ void print_html_wo_body(const char *head)
 	printf("<!DOCTYPE html>\n");
 	printf("<html lang=\"en-US\">\n");
 	printf("    <head>\n");
-	printf("        <title>%s</title>\n", get_gv_config()->repo_root);
+	printf("        <title>%s</title>\n", get_gv_config()->title);
 	if (head != NULL)
 		printf("        %s\n", head);
 	printf("    </head>\n");
